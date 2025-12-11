@@ -40,7 +40,7 @@ pop_grid <- local_path |>
     rural_population = as.integer(rural_population)
   ) |>
   dplyr::filter(total_population > 0) |>
-  mark_presence_in_polygon(y = aqmapr::canadian_provinces, id_col = "abbr")
+  mark_presence_in_polygon(y = provinces_and_territories, id_col = "abbr")
 
 # Find grid centers (space saving)
 gridded_2016_population <- pop_grid |>

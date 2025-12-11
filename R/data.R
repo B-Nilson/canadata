@@ -24,3 +24,19 @@
 #' }
 #' @source <https://agriculture.canada.ca/atlas/data_donnees/griddedPopulationCanada10km/data_donnees/geoJSON/griddedPopulationCanada10km_2016.geojson>
 "gridded_2016_population"
+
+#' Canadian provinces from OpenStreetMap
+#'
+#' Locations, names, and abbreviations of all provinces and territories in Canada from OpenStreetMap.
+#'
+#' @format ## `provinces_and_territories`
+#' An `sf` data frame with 13 rows and 4 columns:
+#' \describe{
+#'   \item{name}{Name of province or territory. Factor.}
+#'   \item{abbr}{Abbreviation of province or territory. Factor.}
+#'   \item{is_province}{TRUE if province, FALSE if territory. Logical.}
+#'   \item{geometry}{Province/territory boundary polygons. `sf` sfc_GEOMETRY.}
+#'   ...
+#' }
+#' @source <https://openstreetmap.org>
+"provinces_and_territories"

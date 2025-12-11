@@ -8,3 +8,4 @@
 ^[.]?air[.]toml$
 ^\.vscode$
 ^data-raw$
+^inst/extdata/example.geojson$
