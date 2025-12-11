@@ -40,7 +40,7 @@ pop_grid <- local_path |>
     rural_population = as.integer(rural_population)
   ) |>
   dplyr::filter(total_population > 0) |>
-  mark_presence_in_polygon(y = provinces_and_territories, id_col = "abbr")
+  mark_presence_in_polygon(y = provinces_and_territories, id_col = "abbreviation")
 
 # Find grid centers (space saving)
 gridded_2016_population <- pop_grid |>
@@ -53,7 +53,7 @@ gridded_2016_population <- pop_grid |>
   dplyr::select(
     "lat",
     "lng",
-    prov_terr = "abbr",
+    prov_terr = "abbreviation",
     "total_land_area",
     "total_population",
     "rural_population"

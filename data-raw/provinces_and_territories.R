@@ -4,15 +4,34 @@ prov_order <- c(
   SK = "Saskatchewan",
   MB = "Manitoba",
   ON = "Ontario",
-  QC = "Qu\u00e9bec",
+  QC = "Quebec",
   NB = "New Brunswick",
   NS = "Nova Scotia",
-  PE = "Prince Edward Island",
   NL = "Newfoundland and Labrador",
+  PE = "Prince Edward Island",
   YT = "Yukon",
   NT = "Northwest Territories",
   NU = "Nunavut"
 )
+
+prov_en_francais <- c(
+  BC = "Colombie-Britannique",
+  AB = "Alberta",
+  SK = "Saskatchewan",
+  MB = "Manitoba",
+  ON = "Ontario",
+  QC = "Qu\u00e9bec",
+  NB = "Nouvelle-\u00c9cosse",
+  NS = "Nouveau-Brunswick",
+  NL = "Terre-Neuve-et-Labrador",
+  PE = "\u00eele du Prince-\u00c9douard",
+  YT = "Yukon",
+  NT = "Territoires du Nord-Ouest",
+  NU = "Nunavut"
+)
+
+# ensure correct order
+prov_en_francais <- prov_en_francais[match(names(prov_order), names(prov_en_francais))]
 
 bbox <- osmdata::getbb("Canada", format_out = "sf_polygon")
 
@@ -28,18 +47,23 @@ osm_results <- osm_results$osm_multipolygons
 provinces_and_territories <- osm_results |>
   dplyr::select("name", "geometry") |>
   dplyr::mutate(
-    name = .data$name |>
+    name_en = .data$name |>
       handyr::swap(
         "New Brunswick / Nouveau-Brunswick",
         with = "New Brunswick"
       ) |>
-      handyr::swap("ᓄᓇᕗᑦ Nunavut", with = "Nunavut") |>
-      factor(levels = prov_order),
-    abbr = .data$name |>
+      handyr::swap("Qu\u00e9bec", with = "Quebec") |>
+      handyr::swap("\u14c4\u14c7\u1557\u1466 Nunavut", with = "Nunavut"),# |>
+      # factor(levels = prov_order),
+    name_fr = .data$name_en |>
+      factor(levels = prov_order, labels = prov_en_francais),
+    abbreviation = .data$name_en |>
       factor(levels = prov_order, labels = names(prov_order)),
-    is_province = .data$abbr %in% names(prov_order)[1:10]
+    is_province = .data$abbreviation %in% names(prov_order)[1:10]
   ) |>
-  dplyr::arrange(.data$name)
+  dplyr::select(-"name") |> 
+  dplyr::relocate("name_fr", .after = "name_en") |>
+  dplyr::arrange(.data$abbreviation)
 
 row.names(provinces_and_territories) <- NULL
 
@@ -61,5 +85,5 @@ usethis::use_data(provinces_and_territories, overwrite = TRUE, compress = "xz")
 geojson_path <- "inst/extdata/example.geojson"
 file.remove(geojson_path) |> invisible() |> suppressWarnings()
 provinces_and_territories |>
-  dplyr::filter(.data$abbr == "PE") |>
+  dplyr::filter(.data$abbreviation == "PE") |>
   sf::st_write(geojson_path, driver = "GeoJSON")
