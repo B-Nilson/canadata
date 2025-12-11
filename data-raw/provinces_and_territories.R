@@ -31,7 +31,10 @@ prov_en_francais <- c(
 )
 
 # ensure correct order
-prov_en_francais <- prov_en_francais[match(names(prov_order), names(prov_en_francais))]
+prov_en_francais <- prov_en_francais[match(
+  names(prov_order),
+  names(prov_en_francais)
+)]
 
 bbox <- osmdata::getbb("Canada", format_out = "sf_polygon")
 
@@ -61,7 +64,7 @@ provinces_and_territories <- osm_results |>
       factor(levels = prov_order, labels = names(prov_order)),
     is_province = .data$abbreviation %in% names(prov_order)[1:10]
   ) |>
-  dplyr::select(-"name") |> 
+  dplyr::select(-"name") |>
   dplyr::relocate("name_fr", .after = "name_en") |>
   dplyr::arrange(.data$abbreviation)
 

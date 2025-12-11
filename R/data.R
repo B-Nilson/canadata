@@ -1,14 +1,14 @@
 #' Gridded 2016 Canada Census of Population
 #'
 #' Grid centeroids and associated population data from the 2016 Canada Census.
-#' 
+#'
 #' The original datasource uses an irregular polygon-based grid from their modelling system,
 #' however this results in large files due to each gridcell being its own polygon.
 #' This dataset uses the grid centroid instead, resulting in a much smaller file.
-#' 
-#' Prior to finding the centroids, the original gridcells are marked with all provinces/territories they overlap with. 
+#'
+#' Prior to finding the centroids, the original gridcells are marked with all provinces/territories they overlap with.
 #' If a cell covers multiple provinces/territories, it is marked with all of them (seperated by commas).
-#' 
+#'
 #' For further information on the original data, see [here](https://agriculture.canada.ca/atlas/data_donnees/griddedPopulationCanada10km/supportdocument_documentdesupport/en/ISO_19131_Population_of_Canada_10km_Gridded.pdf).
 #'
 #' @format ## `gridded_2016_population`
@@ -50,7 +50,7 @@
 #' The public program standard level is used in most
 #' forecasts, warnings, watches, advisories and special weather statements.
 #'
-#' Polygons were simplified using `rmapshaper::ms_simplify(keep_shapes = TRUE)` to reduce file size, 
+#' Polygons were simplified using `rmapshaper::ms_simplify(keep_shapes = TRUE)` to reduce file size,
 #' resulting in less details for some borders.
 #'
 #' @format ## `forecast_zones`
