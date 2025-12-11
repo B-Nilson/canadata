@@ -29,6 +29,9 @@
 #'
 #' Locations, names, and abbreviations of all provinces and territories in Canada from OpenStreetMap.
 #'
+#' Polygons were simplified using `rmapshaper::ms_simplify()` to reduce file size,
+#' resulting in less details for some borders.
+#'
 #' @format ## `provinces_and_territories`
 #' An `sf` data frame with 13 rows and 5 columns:
 #' \describe{

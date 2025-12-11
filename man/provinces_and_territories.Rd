@@ -27,4 +27,8 @@ provinces_and_territories
 \description{
 Locations, names, and abbreviations of all provinces and territories in Canada from OpenStreetMap.
 }
+\details{
+Polygons were simplified using \code{rmapshaper::ms_simplify()} to reduce file size,
+resulting in less details for some borders.
+}
 \keyword{datasets}
