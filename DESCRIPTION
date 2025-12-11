@@ -19,3 +19,5 @@ Imports:
 Depends: 
     R (>= 4.1.0)
 LazyData: true
+URL: https://github.com/B-Nilson/canadata
+BugReports: https://github.com/B-Nilson/canadata/issues
