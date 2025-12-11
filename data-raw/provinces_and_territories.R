@@ -56,8 +56,8 @@ provinces_and_territories <- osm_results |>
         with = "New Brunswick"
       ) |>
       handyr::swap("Qu\u00e9bec", with = "Quebec") |>
-      handyr::swap("\u14c4\u14c7\u1557\u1466 Nunavut", with = "Nunavut"),# |>
-      # factor(levels = prov_order),
+      handyr::swap("\u14c4\u14c7\u1557\u1466 Nunavut", with = "Nunavut") |>
+      factor(levels = prov_order),
     name_fr = .data$name_en |>
       factor(levels = prov_order, labels = prov_en_francais),
     abbreviation = .data$name_en |>
