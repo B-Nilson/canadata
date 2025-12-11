@@ -1,0 +1,9 @@
+^renv$
+^renv\.lock$
+^canadata\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^README\.Rmd$
+^cran-comments\.md$
+^[.]?air[.]toml$
+^\.vscode$
