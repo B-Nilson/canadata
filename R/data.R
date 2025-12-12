@@ -45,6 +45,23 @@
 #' @source <https://openstreetmap.org>
 "provinces_and_territories"
 
+#' Canadian Communities from OpenStreetMap
+#'
+#' All cities, towns, villages, hamlets and municipalities in Canada from OpenStreetMap.
+#'
+#' @format ## `communities`
+#' An `sf` data frame with 13 rows and 5 columns:
+#' \describe{
+#'   \item{name}{English name of province or territory. Character.}
+#'   \item{prov_terr}{Abbreviation of province or territory. Factor.}
+#'   \item{type}{Type of community. Either "city", "town", "village", "hamlet", or "municipality". Factor.}
+#'   \item{lng}{Longitude of the community. CRS: WGS84}
+#'   \item{lat}{Latitude of the community. CRS: WGS84}
+#'   ...
+#' }
+#' @source <https://openstreetmap.org>
+"communities"
+
 #' Canadian Public Forecast Zones
 #'
 #' The Public Standard Forecast Zones layer is a collection of public program
