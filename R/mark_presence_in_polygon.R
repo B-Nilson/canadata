@@ -7,7 +7,7 @@ mark_presence_in_polygon <- function(x, y, id_col = "id") {
     as.data.frame() |>
     dplyr::distinct(row, .keep_all = TRUE) |>
     dplyr::mutate(!!id_col := as.character(y[[id_col]][col])) |>
-    tidyr::complete(row = seq(1, max(row))) |>
+    tidyr::complete(row = seq_len(nrow(x))) |>
     dplyr::arrange(row)
   x[[id_col]] <- fully_within_y[[id_col]]
 
