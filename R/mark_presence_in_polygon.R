@@ -1,3 +1,13 @@
+#' Mark presence of points/polygons in polygons
+#'
+#' Adds a column to `x` labelling the `id_col` of `y` that each `x` is fully within,
+#' or the combined `id_col` seperated by a comma if it is partially within multiple polygons. 
+#'
+#' @param x A sf object containing the points/polygons to be tested.
+#' @param y A sf object containing the polygons to be tested against.
+#' @param id_col The column name in `y` that contains the ids of the polygons.
+#' @return A data frame with the same columns as `x`, and an additional column containing the id(s) of the polygon(s) in `y` that each `x` is within.
+#' @export
 #' @importFrom rlang :=
 mark_presence_in_polygon <- function(x, y, id_col = "id") {
   # Mark the id of the polygon that each cell is fully within
