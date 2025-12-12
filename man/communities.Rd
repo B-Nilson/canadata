@@ -7,11 +7,12 @@
 \format{
 \subsection{\code{communities}}{
 
-An \code{sf} data frame with 13 rows and 5 columns:
+A tibble data frame with 11418 rows and 6 columns:
 \describe{
 \item{name}{Name of community. Character.}
-\item{prov_terr}{Abbreviation of province or territory. Factor.}
 \item{type}{Type of community. Either "city", "town", "village", or "hamlet". Factor.}
+\item{prov_terr}{Abbreviation of province or territory. Factor.}
+\item{fcst_zone}{English name of forecast zone. 50 communities are not in any forecast zone, so they are assigned \code{NA}. Character.}
 \item{lng}{Longitude of the community. CRS: WGS84}
 \item{lat}{Latitude of the community. CRS: WGS84}
 ...

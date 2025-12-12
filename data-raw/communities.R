@@ -62,7 +62,7 @@ osm_communities <- provinces_and_territories$geometry |>
   stats::setNames(provinces_and_territories$abbreviation)
 
 communities <- osm_communities |>
-  dplyr::bind_rows(.id = "prov_terr") |> 
+  dplyr::bind_rows(.id = "prov_terr") |>
   dplyr::mutate(
     prov_terr = prov_terr |>
       factor(levels = provinces_and_territories$abbreviation),
@@ -70,9 +70,21 @@ communities <- osm_communities |>
   ) |>
   dplyr::filter(complete.cases(.data$type, .data$name)) |>
   sf::st_transform(crs = "WGS84") |> # just in case
+  mark_presence_in_polygon(
+    y = forecast_zones |> dplyr::rename(fcst_zone = "name_en"),
+    id_col = "fcst_zone"
+  ) |>
   handyr::sf_as_df(keep_coords = TRUE) |>
-  dplyr::select("name", "prov_terr", "type", lng = "x", lat = "y") |> 
-  dplyr::arrange(.data$prov_terr, .data$type, .data$name)
+  dplyr::select(
+    "name",
+    "type",
+    "prov_terr",
+    "fcst_zone",
+    lng = "x",
+    lat = "y"
+  ) |>
+  dplyr::arrange(.data$prov_terr, .data$type, .data$name) |>
+  tibble::as_tibble()
 
 row.names(communities) <- NULL
 
