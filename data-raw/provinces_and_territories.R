@@ -79,7 +79,8 @@ for (i in seq_len(nrow(provinces_and_territories))) {
 
 # Smooth edges for smaller file size
 provinces_and_territories <- provinces_and_territories |>
-  rmapshaper::ms_simplify()
+  rmapshaper::ms_simplify() |>
+  dplyr::select("abbreviation", "name_en", "name_fr", "is_province", "geometry")
 
 # Write out data
 usethis::use_data(provinces_and_territories, overwrite = TRUE, compress = "xz")
