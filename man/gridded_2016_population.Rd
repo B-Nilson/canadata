@@ -9,12 +9,13 @@
 
 A data frame with 14,780 rows and 6 columns:
 \describe{
+\item{lng}{Longitude of the centroid of the grid cell. CRS: WGS84}
+\item{lat}{Latitude of the centroid of the grid cell. CRS: WGS84}
+\item{prov_terr}{Abbreviation of province/territory the grid cell is located in, or multiple (seperated by commas) if it covers multiple provinces/territories.}
+\item{fcst_zone}{English name of the forecast zone the grid cell is located in, or multiple (seperated by commas) if it covers multiple. 20 points are not in any forecast zone, so they are assigned \code{NA}. Character.}
 \item{total_land_area}{Total land area covered by the original grid cell. Original name: TOT_LND_AREA_SQKM. Units: km^2}
 \item{total_population}{The sum of rural (Original column name: RU_POP2A) and urban (Original column name: UR_POP2A) population.}
 \item{rural_population}{Total rural population. Original column name: RU_POP2A. From data source: total rural non-institutional and institutional residents falling within the BIOMASS cell, 100\% Census data.}
-\item{prov_terr}{The province/territory the grid cell is located in, or multiple (seperated by commas) if it covers multiple provinces/territories.}
-\item{lng}{Longitude of the centroid of the grid cell. CRS: WGS84}
-\item{lat}{Latitude of the centroid of the grid cell. CRS: WGS84}
 ...
 }
 }

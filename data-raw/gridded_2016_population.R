@@ -43,6 +43,10 @@ pop_grid <- local_path |>
   mark_presence_in_polygon(
     y = provinces_and_territories,
     id_col = "abbreviation"
+  ) |>
+  mark_presence_in_polygon(
+    y = forecast_zones |> dplyr::rename(fcst_zone = "name_en"),
+    id_col = "fcst_zone"
   )
 
 # Find grid centers (space saving)
@@ -57,6 +61,7 @@ gridded_2016_population <- pop_grid |>
     "lat",
     "lng",
     prov_terr = "abbreviation",
+    "fcst_zone",
     "total_land_area",
     "total_population",
     "rural_population"
