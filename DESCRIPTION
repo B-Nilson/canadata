@@ -12,12 +12,18 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports: 
+    aqmapr (>= 0.0.0.9000),
     dplyr,
+    forcats,
+    htmltools,
+    leaflet,
     rlang,
     sf,
     tidyr
 Depends: 
-    R (>= 4.1.0)
+    R (>= 4.2.0)
 LazyData: true
 URL: https://github.com/B-Nilson/canadata
 BugReports: https://github.com/B-Nilson/canadata/issues
+Remotes: 
+    B-Nilson/aqmapr
