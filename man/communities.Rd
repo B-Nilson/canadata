@@ -9,9 +9,9 @@
 
 An \code{sf} data frame with 13 rows and 5 columns:
 \describe{
-\item{name}{English name of province or territory. Character.}
+\item{name}{Name of community. Character.}
 \item{prov_terr}{Abbreviation of province or territory. Factor.}
-\item{type}{Type of community. Either "city", "town", "village", "hamlet", or "municipality". Factor.}
+\item{type}{Type of community. Either "city", "town", "village", or "hamlet". Factor.}
 \item{lng}{Longitude of the community. CRS: WGS84}
 \item{lat}{Latitude of the community. CRS: WGS84}
 ...
@@ -25,6 +25,6 @@ An \code{sf} data frame with 13 rows and 5 columns:
 communities
 }
 \description{
-All cities, towns, villages, hamlets and municipalities in Canada from OpenStreetMap.
+All cities, towns, villages and hamlets in Canada from OpenStreetMap.
 }
 \keyword{datasets}

@@ -26,7 +26,7 @@ get_communities <- function(
     dplyr::select(dplyr::any_of(desired_cols))
 }
 
-test2 <- provinces_and_territories$geometry[-1] |>
+osm_communities <- provinces_and_territories$geometry |>
   lapply(
     \(pt) {
       communities <- pt |>
@@ -54,27 +54,25 @@ test2 <- provinces_and_territories$geometry[-1] |>
             # If still fails, return NULL
             handyr::on_error(.return = NULL)
         })
-      communities |>
-        dplyr::filter(lengths(sf::st_intersects(communities, pt)) > 0)
+      # keep only communities that are within the province/territory
+      is_within_pt <- lengths(sf::st_intersects(communities, pt)) > 0
+      communities |> dplyr::filter(is_within_pt)
     }
   ) |>
-  stats::setNames(provinces_and_territories$abbreviation[-1]) |>
-  dplyr::bind_rows(.id = "prov_terr")
+  stats::setNames(provinces_and_territories$abbreviation)
 
-# TODO: remove this once done
-communities <- test |>
-  stats::setNames(provinces_and_territories$abbreviation[1]) |>
-  c(test2) |>
-  dplyr::bind_rows(.id = "prov_terr") |>
-  dplyr::filter(complete.cases(.data$type, .data$name)) |> 
+communities <- osm_communities |>
+  dplyr::bind_rows(.id = "prov_terr") |> 
   dplyr::mutate(
     prov_terr = prov_terr |>
       factor(levels = provinces_and_territories$abbreviation),
-    type = factor(type, c("city", "town", "village", "hamlet", "municipality"))
+    type = factor(type, c("city", "town", "village", "hamlet"))
   ) |>
+  dplyr::filter(complete.cases(.data$type, .data$name)) |>
   sf::st_transform(crs = "WGS84") |> # just in case
   handyr::sf_as_df(keep_coords = TRUE) |>
-  dplyr::select("name", "prov_terr", "type", lng = "x", lat = "y")
+  dplyr::select("name", "prov_terr", "type", lng = "x", lat = "y") |> 
+  dplyr::arrange(.data$prov_terr, .data$type, .data$name)
 
 row.names(communities) <- NULL
 
