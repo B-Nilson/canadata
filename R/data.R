@@ -62,6 +62,24 @@
 #' @source <https://openstreetmap.org>
 "communities"
 
+#' First Nations and Inuit Communities in Canada
+#'
+#' Names and locations of all First Nations and Inuit communities in Canada from OpenData Canada.
+#'
+#' @format ## `indigenous_communities`
+#' An tibble data frame with 685 rows and 6 columns:
+#' \describe{
+#'   \item{name}{Name of community. Character.}
+#'   \item{type}{Type of community. Either "First Nation", "Inuit", or "First Nations, Inuit". Factor.}
+#'   \item{prov_terr}{Abbreviation of province or territory. Factor.}
+#'   \item{fcst_zone}{English name of forecast zone. Two communities are not in any forecast zone, so they are assigned `NA`. Character.}
+#'   \item{lng}{Longitude of the community. CRS: WGS84}
+#'   \item{lat}{Latitude of the community. CRS: WGS84}
+#'   ...
+#' }
+#' @source <https://open.canada.ca/data/en/dataset/b6567c5c-8339-4055-99fa-63f92114d9e4>, <https://open.canada.ca/data/en/dataset/2bcf34b5-4e9a-431b-9e43-1eace6c873bd>
+"indigenous_communities"
+
 #' Canadian Public Forecast Zones
 #'
 #' The Public Standard Forecast Zones layer is a collection of public program
