@@ -27,7 +27,7 @@ desired_columns <- c(
 forecast_zones <- local_path |>
   sf::read_sf() |>
   # Smooth high detail edges
-  rmapshaper::ms_simplify(keep_shapes = TRUE) |>
+  rmapshaper::ms_simplify(keep_shapes = TRUE, keep = 0.2) |>
   # Select/rename columns
   dplyr::select(dplyr::all_of(desired_columns)) |>
   # Round and add units
@@ -38,7 +38,7 @@ forecast_zones <- local_path |>
   # Sort by first province covered by zone
   dplyr::arrange(
     .data$prov_terr |>
-      gsub(pattern = ",*", replacement = "") |>
+      gsub(pattern = ",.*", replacement = "") |>
       factor(levels = levels(provinces_and_territories$abbreviation))
   )
 
