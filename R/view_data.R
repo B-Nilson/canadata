@@ -2,6 +2,7 @@
 view_gridded_2016_population <- function(
   gridded_2016_population = gridded_2016_population
 ) {
+  rlang::check_installed(c("leaflet", "htmltools", "aqmapr"))
   layer_names <- c(
     "Total Population (2016)" = "total_population",
     "Urban Population (2016)" = "urban_population",
@@ -56,6 +57,7 @@ view_gridded_2016_population <- function(
 view_provinces_and_territories <- function(
   provinces_and_territories = provinces_and_territories
 ) {
+  rlang::check_installed(c("leaflet", "htmltools", "aqmapr"))
   pt_labels <- c("Province", "Territory")
   palette <- "viridis" |>
     leaflet::colorFactor(domain = pt_labels)
@@ -86,6 +88,7 @@ view_provinces_and_territories <- function(
 }
 
 view_forecast_zones <- function(forecast_zones = forecast_zones) {
+  rlang::check_installed(c("leaflet", "htmltools", "aqmapr"))
   palette <- "viridis" |>
     leaflet::colorFactor(domain = forecast_zones$prov_terr, ordered = TRUE)
   forecast_zones |>
@@ -108,6 +111,7 @@ view_forecast_zones <- function(forecast_zones = forecast_zones) {
 }
 
 view_communities <- function(communities = communities) {
+  rlang::check_installed(c("leaflet", "htmltools", "aqmapr", "forcats"))
   palette <- "viridis" |>
     leaflet::colorFactor(domain = communities$type, reverse = TRUE)
   communities |>
@@ -134,6 +138,7 @@ view_communities <- function(communities = communities) {
 view_indigenous_communities <- function(
   indigenous_communities = indigenous_communities
 ) {
+  rlang::check_installed(c("leaflet", "htmltools", "aqmapr"))
   palette <- "viridis" |>
     leaflet::colorFactor(domain = indigenous_communities$type)
 

@@ -5,21 +5,21 @@ Authors@R:
     person("Brayden", "Nilson", , "nilson.brayden@gmail.com", role = c("aut", "cre"))
 Description: Provide R objects for various useful Canada datasets, such as province/territory boundaries, community locations, etc.
 License: MIT + file LICENSE
-Suggests: 
-    testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports: 
-    aqmapr (>= 0.0.0.9000),
     dplyr,
-    forcats,
-    htmltools,
-    leaflet,
     rlang,
     sf,
     tidyr
+Suggests:
+    aqmapr (>= 0.0.0.9000),
+    forcats,
+    htmltools,
+    leaflet,
+    testthat (>= 3.0.0)
 Depends: 
     R (>= 4.2.0)
 LazyData: true
