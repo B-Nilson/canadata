@@ -40,18 +40,20 @@ pop_grid <- local_path |>
     rural_population = as.integer(rural_population)
   ) |>
   dplyr::filter(total_population > 0) |>
+  sf::st_transform(crs = 3347) |> # equal area projection for Canada
   mark_presence_in_polygon(
-    y = provinces_and_territories,
+    y = provinces_and_territories |>
+      sf::st_transform(crs = 3347),
     id_col = "abbreviation"
   ) |>
   mark_presence_in_polygon(
-    y = forecast_zones,
+    y = forecast_zones |>
+      sf::st_transform(crs = 3347),
     id_col = "name_en"
   )
 
-# Find grid centers (space saving)
 gridded_2016_population <- pop_grid |>
-  sf::st_transform(crs = 3347) |>
+  # Find grid centers (space saving)
   sf::st_centroid() |>
   sf::st_transform(crs = "WGS84") |>
   # Reduce lat/lng precision
