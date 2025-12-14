@@ -320,7 +320,6 @@
       ],
       "Imports": [
         "aqhi (>= 0.1.0)",
-        "canadata (>= 0.0.0.9000)",
         "data.table",
         "dplyr",
         "handyr (>= 0.0.0.9000)",
@@ -340,6 +339,7 @@
       "Suggests": [
         "ambiorix",
         "callr",
+        "canadata (>= 0.0.0.9000)",
         "geojson",
         "pbapply",
         "sf",
@@ -352,11 +352,11 @@
       "Author": "Brayden Nilson [aut, cre]",
       "Maintainer": "Brayden Nilson <brayden.nilson@ec.gc.ca>",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "B-Nilson",
       "RemoteRepo": "aqmapr",
       "RemoteRef": "main",
-      "RemoteSha": "8f67abb2abc91e8be7ed3b151c9899713151f1f7",
+      "RemoteSha": "b845a38a24be947b306a6e618f0217fa059ad92c",
+      "RemoteHost": "api.github.com",
       "Remotes": "github::B-Nilson/handyr, github::B-Nilson/aqhi, github::B-Nilson/canadata"
     },
     "askpass": {
