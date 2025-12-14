@@ -55,6 +55,7 @@ pop_grid <- local_path |>
 gridded_2016_population <- pop_grid |>
   # Find grid centers (space saving)
   sf::st_centroid() |>
+  suppressWarnings() |> # its okay here that st_centroid assumes attributes are constant over geometries
   sf::st_transform(crs = "WGS84") |>
   # Reduce lat/lng precision
   handyr::sf_as_df(keep_coords = TRUE) |>
@@ -70,10 +71,10 @@ gridded_2016_population <- pop_grid |>
   ) |>
   # Sort by first province&zones covered by cell, then bottom left to top right
   dplyr::arrange(
-    .data$prov_terr |>
+    .data$prov_terrs |>
       gsub(pattern = ",.*", replacement = "") |>
       factor(levels = levels(provinces_and_territories$abbreviation)),
-    .data$fcst_zone |>
+    .data$fcst_zones |>
       gsub(pattern = ",.*", replacement = "") |>
       factor(levels = unique(forecast_zones$name_en)),
     .data$lng,

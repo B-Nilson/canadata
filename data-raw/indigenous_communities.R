@@ -80,7 +80,8 @@ indigenous_communities <- dplyr::bind_rows(
   ) |>
   handyr::sf_as_df(keep_coords = TRUE) |>
   dplyr::mutate(
-    type = .data$type |> factor(levels = c("First Nations", "Inuit", "First Nations, Inuit")),
+    type = .data$type |>
+      factor(levels = c("First Nations", "Inuit", "First Nations, Inuit")),
     prov_terr = prov_terr |>
       factor(levels = provinces_and_territories$abbreviation),
     fcst_zone = fcst_zone |>

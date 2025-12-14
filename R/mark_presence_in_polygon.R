@@ -1,7 +1,7 @@
 #' Mark presence of points/polygons in polygons
 #'
 #' Adds a column to `x` labelling the `id_col` of `y` that each `x` is fully within,
-#' or the combined `id_col` seperated by a comma if it is partially within multiple polygons. 
+#' or the combined `id_col` seperated by a comma if it is partially within multiple polygons.
 #'
 #' @param x A sf object containing the points/polygons to be tested.
 #' @param y A sf object containing the polygons to be tested against.

@@ -1,18 +1,18 @@
 test_that("no warnings/errors for communities", {
   skip_if_not(interactive())
-  view_communities() |> 
+  view_communities() |>
     expect_silent()
 })
 
 test_that("no warnings/errors for indigenous communities", {
   skip_if_not(interactive())
-  view_indigenous_communities() |> 
+  view_indigenous_communities() |>
     expect_silent()
 })
 
 test_that("no warnings/errors for forecast zones", {
   skip_if_not(interactive())
-  view_forecast_zones() |> 
+  view_forecast_zones() |>
     expect_silent()
 })
 
