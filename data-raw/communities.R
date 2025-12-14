@@ -29,7 +29,7 @@ get_communities <- function(
 osm_communities <- provinces_and_territories$geometry |>
   lapply(
     \(pt) {
-      communities <- pt |>
+      pt |>
         sf::st_make_grid(n = c(4, 4)) |> # cut into 16 polygons
         # get bounding boxes for each
         lapply(\(x) {
@@ -54,52 +54,58 @@ osm_communities <- provinces_and_territories$geometry |>
             # If still fails, return NULL
             handyr::on_error(.return = NULL)
         })
-      # keep only communities that are within the province/territory
-      is_within_pt <- lengths(sf::st_intersects(communities, pt)) > 0
-      communities |> dplyr::filter(is_within_pt)
     }
-  ) |>
-  stats::setNames(provinces_and_territories$abbreviation)
+  )
 
 communities <- osm_communities |>
-  dplyr::bind_rows(.id = "prov_terr") |>
-  # drop community in US that snuck in as a NB community
-  dplyr::filter(
-    !(.data$name == "Baring Plantation" & .data$prov_terr == "NB")
-  ) |>
-  dplyr::mutate(
-    # manual fix for points just on the edge of a fcst zone
-    fcst_zone = dplyr::case_when(
-      .data$name %in%
-        c("Port Lambton", "Mooretown") &
-        .data$prov_terr == "ON" ~ "Sarnia - Lambton",
-      TRUE ~ .data$fcst_zone
-    ) |>
-      factor(levels = forecast_zones$name_en),
-    prov_terr = prov_terr |>
-      factor(levels = provinces_and_territories$abbreviation),
-    fcst_zone = fcst_zone |>
-      factor(levels = forecast_zones$name_en),
-    type = factor(type, c("city", "town", "village", "hamlet"))
-  ) |>
+  dplyr::bind_rows() |>
+  # Drop non-desired types and the handful with missing names
+  dplyr::mutate(type = factor(type, c("city", "town", "village", "hamlet"))) |>
   dplyr::filter(complete.cases(.data$type, .data$name)) |>
-  sf::st_transform(crs = "WGS84") |> # just in case
+  # Mark province/territory and forecast zone
+  sf::st_transform(crs = 3347) |> # equal area projection for Canada
   mark_presence_in_polygon(
-    y = forecast_zones |> dplyr::rename(fcst_zone = "name_en"),
-    id_col = "fcst_zone"
+    y = provinces_and_territories |> sf::st_transform(crs = 3347),
+    id_col = "abbreviation"
   ) |>
+  dplyr::filter(
+    # drop US communities (where bounding boxes in search partly cover the US)
+    !is.na(.data$abbreviation),
+    # drop community in US that snuck in as a NB community
+    !(.data$name == "Baring Plantation" & .data$abbreviation == "NB")
+  ) |>
+  mark_presence_in_polygon(
+    y = forecast_zones |> sf::st_transform(crs = 3347),
+    id_col = "name_en"
+  ) |>
+  sf::st_transform(crs = "WGS84") |>
+  # Drop sf typing for space saving
   handyr::sf_as_df(keep_coords = TRUE) |>
   dplyr::select(
     "name",
     "type",
-    "prov_terr",
-    "fcst_zone",
+    prov_terr = "abbreviation",
+    fcst_zone = "name_en",
     lng = "x",
     lat = "y"
   ) |>
+  # Cleanup
+  dplyr::mutate(
+    # manual fix for points just on the edge of a fcst zone
+    fcst_zone = dplyr::case_when(
+      is.na(.data$fcst_zone) &
+        .data$name %in% c("Port Lambton", "Mooretown") &
+        .data$prov_terr == "ON" ~ "Sarnia - Lambton",
+      TRUE ~ .data$fcst_zone
+    ),
+    # Factorize
+    prov_terr = prov_terr |>
+      factor(levels = provinces_and_territories$abbreviation),
+    fcst_zone = fcst_zone |>
+      factor(levels = forecast_zones$name_en)
+  ) |>
   dplyr::arrange(.data$prov_terr, .data$type, .data$name) |>
+  dplyr::distinct() |>
   tibble::as_tibble()
-
-row.names(communities) <- NULL
 
 usethis::use_data(communities, overwrite = TRUE)
