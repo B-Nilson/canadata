@@ -45,8 +45,8 @@ pop_grid <- local_path |>
     id_col = "abbreviation"
   ) |>
   mark_presence_in_polygon(
-    y = forecast_zones |> dplyr::rename(fcst_zone = "name_en"),
-    id_col = "fcst_zone"
+    y = forecast_zones,
+    id_col = "name_en"
   )
 
 # Find grid centers (space saving)
@@ -60,11 +60,22 @@ gridded_2016_population <- pop_grid |>
   dplyr::select(
     "lat",
     "lng",
-    prov_terr = "abbreviation",
-    "fcst_zone",
+    prov_terrs = "abbreviation", # plural because may overlap 1+
+    fcst_zones = "name_en", # plural because may overlap 1+
     "total_land_area",
     "total_population",
     "rural_population"
+  ) |>
+  # Sort by first province&zones covered by cell, then bottom left to top right
+  dplyr::arrange(
+    .data$prov_terr |>
+      gsub(pattern = ",.*", replacement = "") |>
+      factor(levels = levels(provinces_and_territories$abbreviation)),
+    .data$fcst_zone |>
+      gsub(pattern = ",.*", replacement = "") |>
+      factor(levels = unique(forecast_zones$name_en)),
+    .data$lng,
+    .data$lat
   )
 
 usethis::use_data(gridded_2016_population, overwrite = TRUE)
