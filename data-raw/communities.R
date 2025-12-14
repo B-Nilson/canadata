@@ -66,6 +66,8 @@ communities <- osm_communities |>
   dplyr::mutate(
     prov_terr = prov_terr |>
       factor(levels = provinces_and_territories$abbreviation),
+    fcst_zone = fcst_zone |>
+      factor(levels = forecast_zones$name_en),
     type = factor(type, c("city", "town", "village", "hamlet"))
   ) |>
   dplyr::filter(complete.cases(.data$type, .data$name)) |>

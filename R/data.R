@@ -56,7 +56,7 @@
 #'   \item{name}{Name of community. Character.}
 #'   \item{type}{Type of community. Either "city", "town", "village", or "hamlet". Factor.}
 #'   \item{prov_terr}{Abbreviation of province or territory. Factor.}
-#'   \item{fcst_zone}{English name of forecast zone. 50 communities are not in any forecast zone, so they are assigned `NA`. Character.}
+#'   \item{fcst_zone}{English name of forecast zone. 50 communities are not in any forecast zone, so they are assigned `NA`. Factor.}
 #'   \item{lng}{Longitude of the community. CRS: WGS84}
 #'   \item{lat}{Latitude of the community. CRS: WGS84}
 #'   ...
@@ -74,7 +74,7 @@
 #'   \item{name}{Name of community. Character.}
 #'   \item{type}{Type of community. Either "First Nation", "Inuit", or "First Nations, Inuit". Factor.}
 #'   \item{prov_terr}{Abbreviation of province or territory. Factor.}
-#'   \item{fcst_zone}{English name of forecast zone. Two communities are not in any forecast zone, so they are assigned `NA`. Character.}
+#'   \item{fcst_zone}{English name of forecast zone. Two communities are not in any forecast zone, so they are assigned `NA`. Factor.}
 #'   \item{lng}{Longitude of the community. CRS: WGS84}
 #'   \item{lat}{Latitude of the community. CRS: WGS84}
 #'   ...

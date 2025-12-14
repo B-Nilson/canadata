@@ -82,7 +82,9 @@ indigenous_communities <- dplyr::bind_rows(
   dplyr::mutate(
     type = .data$type |> factor(levels = c("First Nations", "Inuit", "First Nations, Inuit")),
     prov_terr = prov_terr |>
-      factor(levels = provinces_and_territories$abbreviation)
+      factor(levels = provinces_and_territories$abbreviation),
+    fcst_zone = fcst_zone |>
+      factor(levels = forecast_zones$name_en)
   ) |>
   dplyr::arrange(.data$prov_terr, .data$type, .data$name) |>
   dplyr::select("name", "type", "prov_terr", "fcst_zone", lng = "x", lat = "y")

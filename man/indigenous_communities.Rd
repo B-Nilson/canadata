@@ -12,7 +12,7 @@ An tibble data frame with 685 rows and 6 columns:
 \item{name}{Name of community. Character.}
 \item{type}{Type of community. Either "First Nation", "Inuit", or "First Nations, Inuit". Factor.}
 \item{prov_terr}{Abbreviation of province or territory. Factor.}
-\item{fcst_zone}{English name of forecast zone. Two communities are not in any forecast zone, so they are assigned \code{NA}. Character.}
+\item{fcst_zone}{English name of forecast zone. Two communities are not in any forecast zone, so they are assigned \code{NA}. Factor.}
 \item{lng}{Longitude of the community. CRS: WGS84}
 \item{lat}{Latitude of the community. CRS: WGS84}
 ...
