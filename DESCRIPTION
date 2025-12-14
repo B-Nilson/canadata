@@ -17,6 +17,7 @@ Imports:
 Suggests:
     aqmapr (>= 0.0.0.9000),
     forcats,
+    handyr (>= 0.0.0.9000),
     htmltools,
     leaflet,
     testthat (>= 3.0.0)
@@ -25,5 +26,6 @@ Depends:
 LazyData: true
 URL: https://github.com/B-Nilson/canadata
 BugReports: https://github.com/B-Nilson/canadata/issues
-Remotes: 
-    B-Nilson/aqmapr
+Remotes:  
+    B-Nilson/aqmapr,
+    B-Nilson/handyr

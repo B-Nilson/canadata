@@ -164,3 +164,55 @@ view_indigenous_communities <- function(
     }) |>
     aqmapr::make_leaflet_map(point_layers = _)
 }
+
+view_all_layers <- function(
+  gridded_2016_population = gridded_2016_population,
+  provinces_and_territories = provinces_and_territories,
+  forecast_zones = forecast_zones,
+  communities = communities,
+  indigenous_communities = indigenous_communities
+) {
+  rlang::check_installed(c("leaflet", "htmltools", "aqmapr", "handyr"))
+
+  groups <- c("Population", "Communities", "Indigenous Communities")
+  fills <- c("red", "green", "blue")
+  point_layers <- list(
+    gridded_2016_population,
+    communities,
+    indigenous_communities
+  ) |>
+    handyr::for_each(.enumerate = TRUE, .show_progress = FALSE, \(x, i) {
+      aqmapr::PointLayer(
+        data = x |>
+          sf::st_as_sf(coords = c("lng", "lat"), crs = "WGS84") |>
+          tidyr::unite(
+            col = "label",
+            dplyr::starts_with("prov_terr") | dplyr::starts_with("fcst_zone"),
+            sep = "<br/>",
+            remove = FALSE
+          ),
+        group = groups[i],
+        fill = fills[i],
+        label = ~label
+      )
+    })
+
+  groups <- c("Provinces and Territories", "Forecast Zones")
+  polygon_layers <- list(
+    provinces_and_territories,
+    forecast_zones
+  ) |>
+    handyr::for_each(.enumerate = TRUE, .show_progress = FALSE, \(x, i) {
+      aqmapr::PolygonLayer(
+        data = x,
+        group = groups[i],
+        opacity = 0.5,
+        label = ~name_en
+      )
+    })
+
+  aqmapr::make_leaflet_map(
+    point_layers = point_layers,
+    polygon_layers = polygon_layers
+  )
+}
