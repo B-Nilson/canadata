@@ -63,7 +63,19 @@ osm_communities <- provinces_and_territories$geometry |>
 
 communities <- osm_communities |>
   dplyr::bind_rows(.id = "prov_terr") |>
+  # drop community in US that snuck in as a NB community
+  dplyr::filter(
+    !(.data$name == "Baring Plantation" & .data$prov_terr == "NB")
+  ) |>
   dplyr::mutate(
+    # manual fix for points just on the edge of a fcst zone
+    fcst_zone = dplyr::case_when(
+      .data$name %in%
+        c("Port Lambton", "Mooretown") &
+        .data$prov_terr == "ON" ~ "Sarnia - Lambton",
+      TRUE ~ .data$fcst_zone
+    ) |>
+      factor(levels = forecast_zones$name_en),
     prov_terr = prov_terr |>
       factor(levels = provinces_and_territories$abbreviation),
     fcst_zone = fcst_zone |>
