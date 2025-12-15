@@ -10,6 +10,12 @@ test_that("no warnings/errors for indigenous communities", {
     expect_silent()
 })
 
+test_that("no warnings/errors for indigenous lands", {
+  skip_if_not(interactive())
+  view_indigenous_lands(indigenous_lands) |>
+    expect_silent()
+})
+
 test_that("no warnings/errors for forecast zones", {
   skip_if_not(interactive())
   view_forecast_zones() |>

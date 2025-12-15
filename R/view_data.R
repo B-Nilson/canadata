@@ -165,6 +165,32 @@ view_indigenous_communities <- function(
     aqmapr::make_leaflet_map(point_layers = _)
 }
 
+view_indigenous_lands <- function(indigenous_lands = indigenous_lands) {
+  rlang::check_installed(c("leaflet", "aqmapr", "htmltools"))
+
+  map_data <- indigenous_lands |>
+    tidyr::unite(
+      col = "label",
+      -"geometry",
+      sep = "<br/>",
+      remove = FALSE
+    )
+  
+  map_data |>
+    aqmapr::PolygonLayer(
+      group = "Indigenous Lands",
+      data = _,
+      fill = ~type,
+      fill_palette = leaflet::colorFactor(
+        "viridis",
+        levels = indigenous_lands$type |> levels()
+      ),
+      label = ~ label |> lapply(htmltools::HTML)
+    ) |>
+    list() |>
+    aqmapr::make_leaflet_map(polygon_layers = _)
+}
+
 view_all_layers <- function(
   gridded_2016_population = gridded_2016_population,
   provinces_and_territories = provinces_and_territories,

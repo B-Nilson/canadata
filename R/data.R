@@ -82,6 +82,27 @@
 #' @source <https://open.canada.ca/data/en/dataset/b6567c5c-8339-4055-99fa-63f92114d9e4>, <https://open.canada.ca/data/en/dataset/2bcf34b5-4e9a-431b-9e43-1eace6c873bd>
 "indigenous_communities"
 
+#' Aboriginal Lands of Canada Legislative Boundaries 
+#'
+#' Locations and names of all Aboriginal land legislative boundaries in Canada from OpenData Canada.
+#'
+#' Polygons were simplified using `rmapshaper::ms_simplify()` to reduce file size,
+#' resulting in less details for some borders.
+#'
+#' @format ## `indigenous_lands`
+#' An `sf` tibble data frame with 13 rows and 5 columns:
+#' \describe{
+#'   \item{type}{Boundary type. Either "Indian Land", "Indian Reserve", or "Land Claim".  Factor.}
+#'   \item{name_en}{English name of area. Character.}
+#'   \item{name_fr}{French name of area. Character.}
+#'   \item{prov_terrs}{Abbreviation of province/territory the area is located in, or multiple (seperated by commas) if it covers multiple provinces/territories.}
+#'   \item{fcst_zones}{English name of the forecast zone the area is located in, or multiple (seperated by commas) if it covers multiple. 8 polygons are not in any forecast zone, so they are assigned `NA`. Character.}
+#'   \item{geometry}{Indigenous lands legislative boundary polygons. `sf` sfc_GEOMETRY.}
+#'   ...
+#' }
+#' @source <https://open.canada.ca/data/en/dataset/522b07b9-78e2-4819-b736-ad9208eb1067>
+"indigenous_lands"
+
 #' Canadian Public Forecast Zones
 #'
 #' The Public Standard Forecast Zones layer is a collection of public program
