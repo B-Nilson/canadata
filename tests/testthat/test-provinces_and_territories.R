@@ -11,7 +11,13 @@ test_that("class / dimensions are correct", {
 
   # correct column names
   colnames(provinces_and_territories) |>
-    expect_equal(c("abbreviation", "name_en", "name_fr", "is_province", "geometry"))
+    expect_equal(c(
+      "abbreviation",
+      "name_en",
+      "name_fr",
+      "is_province",
+      "geometry"
+    ))
 
   # correct column types
   lapply(provinces_and_territories, class) |>
@@ -23,19 +29,19 @@ test_that("class / dimensions are correct", {
       "logical",
       c("sfc_GEOMETRY", "sfc")
     ))
-  
+
   # correct geometry type
   provinces_and_territories$geometry |>
     sf::st_geometry_type() |>
     expect_in(c("POLYGON", "MULTIPOLYGON"))
-  
+
   # correct is_province values
   provinces_and_territories$is_province |>
-    sum() |> 
+    sum() |>
     expect_equal(10)
   provinces_and_territories$is_province |>
     expect_identical(
-      ! provinces_and_territories$abbreviation %in% c("YT", "NT", "NU")
+      !provinces_and_territories$abbreviation %in% c("YT", "NT", "NU")
     )
 })
 

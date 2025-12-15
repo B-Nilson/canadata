@@ -66,8 +66,8 @@ provinces_and_territories <- osm_results |>
   ) |>
   dplyr::select(-"name") |>
   dplyr::relocate("name_fr", .after = "name_en") |>
-  dplyr::arrange(.data$abbreviation) |> 
-  tibble::as_tibble() |> 
+  dplyr::arrange(.data$abbreviation) |>
+  tibble::as_tibble() |>
   sf::st_as_sf()
 
 # Union all provinces

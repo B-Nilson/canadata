@@ -39,8 +39,8 @@ desired_cols <- c(
   "geometry"
 )
 
-indigenous_lands <- local_path |> 
-  sf::read_sf() |> 
+indigenous_lands <- local_path |>
+  sf::read_sf() |>
   # Mark p/t(s) and fcst zone(s)
   sf::st_transform(crs = 3347) |> # equal area projection for Canada
   mark_presence_in_polygon(
@@ -52,13 +52,13 @@ indigenous_lands <- local_path |>
     y = forecast_zones |>
       sf::st_transform(crs = 3347),
     id_col = "name_en"
-  ) |> 
+  ) |>
   sf::st_transform(crs = "WGS84") |>
   # Cleanup and reduce line complexity for smaller files
-  sf::st_make_valid() |> 
+  sf::st_make_valid() |>
   rmapshaper::ms_simplify(keep_shapes = TRUE) |>
   # Select desired columns and fix types
-  dplyr::select(dplyr::all_of(desired_cols)) |> 
+  dplyr::select(dplyr::all_of(desired_cols)) |>
   dplyr::mutate(type = factor(type)) |>
   # Sort by first province&zones covered by cell, then type
   dplyr::arrange(

@@ -11,7 +11,14 @@ test_that("class / dimensions are correct", {
 
   # correct column names
   colnames(forecast_zones) |>
-    expect_equal(c("prov_terrs", "name_en", "name_fr", "perimeter", "area", "geometry"))
+    expect_equal(c(
+      "prov_terrs",
+      "name_en",
+      "name_fr",
+      "perimeter",
+      "area",
+      "geometry"
+    ))
 
   # correct column types
   lapply(forecast_zones, class) |>
@@ -24,18 +31,18 @@ test_that("class / dimensions are correct", {
       "units",
       c("sfc_GEOMETRY", "sfc")
     ))
-  
+
   # correct geometry type
   forecast_zones$geometry |>
     sf::st_geometry_type() |>
     expect_in(c("POLYGON", "MULTIPOLYGON"))
-  
+
   # correct units
-  forecast_zones$perimeter |> 
+  forecast_zones$perimeter |>
     attr("units") |>
     as.character() |>
     expect_equal("km")
-  forecast_zones$area |> 
+  forecast_zones$area |>
     attr("units") |>
     as.character() |>
     expect_equal("km^2")

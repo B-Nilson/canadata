@@ -72,13 +72,15 @@ indigenous_communities <- dplyr::bind_rows(
   sf::st_as_sf(coords = c("lng", "lat"), crs = "WGS84") |>
   sf::st_transform(crs = 3347) |> # equal area projection for Canada
   mark_presence_in_polygon(
-    y = provinces_and_territories |> dplyr::rename(prov_terr = "abbreviation")|>
-  sf::st_transform(crs = 3347),
+    y = provinces_and_territories |>
+      dplyr::rename(prov_terr = "abbreviation") |>
+      sf::st_transform(crs = 3347),
     id_col = "prov_terr"
   ) |>
   mark_presence_in_polygon(
-    y = forecast_zones |> dplyr::rename(fcst_zone = "name_en")|>
-  sf::st_transform(crs = 3347),
+    y = forecast_zones |>
+      dplyr::rename(fcst_zone = "name_en") |>
+      sf::st_transform(crs = 3347),
     id_col = "fcst_zone"
   ) |>
   sf::st_transform(crs = "WGS84") |>

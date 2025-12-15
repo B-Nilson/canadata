@@ -32,7 +32,7 @@ manitoba_lakes_zone_names <- c(
 forecast_zones <- local_path |>
   sf::read_sf() |>
   # Drop the Manitoba Lakes shapes which are over water and overlap the land zones which buffer into the water
-  dplyr::filter(! NAME %in% manitoba_lakes_zone_names) |> 
+  dplyr::filter(!NAME %in% manitoba_lakes_zone_names) |>
   # Smooth high detail edges
   rmapshaper::ms_simplify(keep_shapes = TRUE, keep = 0.2) |>
   # Select/rename columns
@@ -49,10 +49,10 @@ forecast_zones <- forecast_zones |>
     .data$prov_terrs |>
       gsub(pattern = ",.*", replacement = "") |>
       factor(levels = levels(provinces_and_territories$abbreviation)),
-    (.data$geometry |> 
+    (.data$geometry |>
       sf::st_centroid() |>
       sf::st_coordinates())[, 2],
-    (.data$geometry |> 
+    (.data$geometry |>
       sf::st_centroid() |>
       sf::st_coordinates())[, 1]
   )

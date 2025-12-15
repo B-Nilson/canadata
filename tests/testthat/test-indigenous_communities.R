@@ -47,7 +47,10 @@ test_that("NA fcst zones are truly outside fcst zones", {
     suppressWarnings() # its okay here that st_intersection assumes attributes are constant over geometries
 
   indigenous_communities_without_fcst_zone <- indigenous_communities |>
-    dplyr::anti_join(indigenous_communities_with_fcst_zone, by = c("name", "prov_terr")) |>
+    dplyr::anti_join(
+      indigenous_communities_with_fcst_zone,
+      by = c("name", "prov_terr")
+    ) |>
     dplyr::mutate(fcst_zone_expected = NA_character_)
 
   expect_identical(

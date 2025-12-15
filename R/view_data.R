@@ -175,7 +175,7 @@ view_indigenous_lands <- function(indigenous_lands = indigenous_lands) {
       sep = "<br/>",
       remove = FALSE
     )
-  
+
   map_data |>
     aqmapr::PolygonLayer(
       group = "Indigenous Lands",

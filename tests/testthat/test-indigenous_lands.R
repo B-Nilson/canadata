@@ -11,7 +11,14 @@ test_that("class / dimensions are correct", {
 
   # correct column names
   colnames(indigenous_lands) |>
-    expect_equal(c("type", "name_en", "name_fr", "prov_terrs", "fcst_zones", "geometry"))
+    expect_equal(c(
+      "type",
+      "name_en",
+      "name_fr",
+      "prov_terrs",
+      "fcst_zones",
+      "geometry"
+    ))
 
   # correct column types
   lapply(indigenous_lands, class) |>
@@ -24,7 +31,7 @@ test_that("class / dimensions are correct", {
       "character",
       c("sfc_GEOMETRY", "sfc")
     ))
-  
+
   # correct geometry type
   indigenous_lands$geometry |>
     sf::st_geometry_type() |>
