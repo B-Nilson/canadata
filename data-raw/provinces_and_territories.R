@@ -66,9 +66,9 @@ provinces_and_territories <- osm_results |>
   ) |>
   dplyr::select(-"name") |>
   dplyr::relocate("name_fr", .after = "name_en") |>
-  dplyr::arrange(.data$abbreviation)
-
-row.names(provinces_and_territories) <- NULL
+  dplyr::arrange(.data$abbreviation) |> 
+  tibble::as_tibble() |> 
+  sf::st_as_sf()
 
 # Union all provinces
 for (i in seq_len(nrow(provinces_and_territories))) {
