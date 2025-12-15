@@ -20,37 +20,58 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/canadata)](https://CRAN.R-project.org/package=canadata)
 <!-- badges: end -->
 
-The goal of canadata is to ...
+The goal of canadata ("Canada" + "data") is to provide standardized Canadian spatial datasets for use in R. 
+
+The majority of data comes effectively unaltered from open data sources such as OpenStreetMap (thanks to {osmdata}) and Canada's Federal OpenData platform. Where possible, links to related datasets will be added (such as what Province/Territory, or forecast zone a community is in).
+
+All polygon layers have been smoothed as minimally as possible for file size requirements while trying to maintain spatial accuracy. As a result, more complex boundaries may be smoother than in reality causing potential edge case issues. Please [submit and issue](https://github.com/B-Nilson/canadata/issues/new) if you encounter a problem that could be resolved be less smoothing.
+
+All point layers have been saved as non-sf objects (lat/lng columns instead of a POINT geometry), and require converting to sf before performing spatial operations (see #converting-point-layers)
+
 
 ## Installation
 
 You can install the development version of canadata like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+# install.packages("pak")
+pak::pak("B-Nilson/canadata")
 ```
 
-## Example
+## Datasets
 
-This is a basic example which shows you how to solve a common problem:
+The primary datasets made available are:
 
-```{r example}
+```{r datasets}
 library(canadata)
-## basic example code
+
+provinces_and_territories |> print()
+forecast_zones |> print()
+indigenous_lands |> print()
+communities |> print()
+indigenous_communities |> print()
+gridded_2016_population |> print()
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+## Converting Point Layers
 
-```{r cars}
-summary(cars)
+All point layers have been saved as non-sf objects (lat/lng columns instead of a POINT geometry) with a CRS of `"WGS84"`, and require converting to sf before performing spatial operations:
+
+```{r convert_points}
+library(canadata)
+
+communities |> 
+  sf::st_as_sf(coords = c("lng", "lat"), crs = "WGS84") |>
+  print()
+
+indigenous_communities |> 
+  sf::st_as_sf(coords = c("lng", "lat"), crs = "WGS84") |>
+  print()
+
+
+gridded_2016_population |> 
+  sf::st_as_sf(coords = c("lng", "lat"), crs = "WGS84") |>
+  print()
+
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
