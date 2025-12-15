@@ -7,7 +7,7 @@
 \format{
 \subsection{\code{gridded_2016_population}}{
 
-A data frame with 14,780 rows and 6 columns:
+A tibble data frame with 14,780 rows and 6 columns:
 \describe{
 \item{lng}{Longitude of the centroid of the grid cell. CRS: WGS84}
 \item{lat}{Latitude of the centroid of the grid cell. CRS: WGS84}

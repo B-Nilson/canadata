@@ -12,7 +12,7 @@
 #' For further information on the original data, see [here](https://agriculture.canada.ca/atlas/data_donnees/griddedPopulationCanada10km/supportdocument_documentdesupport/en/ISO_19131_Population_of_Canada_10km_Gridded.pdf).
 #'
 #' @format ## `gridded_2016_population`
-#' A data frame with 14,780 rows and 6 columns:
+#' A tibble data frame with 14,780 rows and 6 columns:
 #' \describe{
 #'   \item{lng}{Longitude of the centroid of the grid cell. CRS: WGS84}
 #'   \item{lat}{Latitude of the centroid of the grid cell. CRS: WGS84}
@@ -34,7 +34,7 @@
 #' resulting in less details for some borders.
 #'
 #' @format ## `provinces_and_territories`
-#' An `sf` data frame with 13 rows and 5 columns:
+#' An `sf` tibble data frame with 13 rows and 5 columns:
 #' \describe{
 #'   \item{abbreviation}{Abbreviation of province or territory. Factor.}
 #'   \item{name_en}{English name of province or territory. Factor.}
@@ -69,7 +69,7 @@
 #' Names and locations of all First Nations and Inuit communities in Canada from OpenData Canada.
 #'
 #' @format ## `indigenous_communities`
-#' An tibble data frame with 685 rows and 6 columns:
+#' A tibble data frame with 685 rows and 6 columns:
 #' \describe{
 #'   \item{name}{Name of community. Character.}
 #'   \item{type}{Type of community. Either "First Nation", "Inuit", or "First Nations, Inuit". Factor.}
@@ -94,7 +94,7 @@
 #' resulting in less details for some borders.
 #'
 #' @format ## `forecast_zones`
-#' An `sf` data frame with 13 rows and 5 columns:
+#' An `sf` tibble data frame with 13 rows and 5 columns:
 #' \describe{
 #'   \item{prov_terr}{Abbreviation of province(s)/territory(ies) the zone covers, seperated by commas where more than 1. Character.}
 #'   \item{name_en}{English name of the zone. Factor.}

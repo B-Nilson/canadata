@@ -7,7 +7,7 @@
 \format{
 \subsection{\code{forecast_zones}}{
 
-An \code{sf} data frame with 13 rows and 5 columns:
+An \code{sf} tibble data frame with 13 rows and 5 columns:
 \describe{
 \item{prov_terr}{Abbreviation of province(s)/territory(ies) the zone covers, seperated by commas where more than 1. Character.}
 \item{name_en}{English name of the zone. Factor.}

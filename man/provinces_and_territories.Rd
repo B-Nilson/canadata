@@ -7,7 +7,7 @@
 \format{
 \subsection{\code{provinces_and_territories}}{
 
-An \code{sf} data frame with 13 rows and 5 columns:
+An \code{sf} tibble data frame with 13 rows and 5 columns:
 \describe{
 \item{abbreviation}{Abbreviation of province or territory. Factor.}
 \item{name_en}{English name of province or territory. Factor.}

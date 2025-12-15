@@ -7,7 +7,7 @@
 \format{
 \subsection{\code{indigenous_communities}}{
 
-An tibble data frame with 685 rows and 6 columns:
+A tibble data frame with 685 rows and 6 columns:
 \describe{
 \item{name}{Name of community. Character.}
 \item{type}{Type of community. Either "First Nation", "Inuit", or "First Nations, Inuit". Factor.}
