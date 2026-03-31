@@ -20,6 +20,7 @@ desired_columns <- c(
   name_fr = "NOM",
   perimeter = "PERIM_KM",
   area = "AREA_KM2",
+  version = "version",
   "geometry"
 )
 manitoba_lakes_zone_names <- c(
@@ -37,10 +38,11 @@ forecast_zones <- local_path |>
   rmapshaper::ms_simplify(keep_shapes = TRUE, keep = 0.2) |>
   # Select/rename columns
   dplyr::select(dplyr::all_of(desired_columns)) |>
-  # Round and add units
+  # Round and add units, convert version to factor
   dplyr::mutate(
     perimeter = perimeter |> round(digits = 2) |> units::set_units("km"),
-    area = area |> round(digits = 1) |> units::set_units("km^2")
+    area = area |> round(digits = 1) |> units::set_units("km^2"),
+    version = factor(version)
   )
 
 forecast_zones <- forecast_zones |>

@@ -113,15 +113,18 @@
 #'
 #' Polygons were simplified using `rmapshaper::ms_simplify(keep_shapes = TRUE)` to reduce file size,
 #' resulting in less details for some borders.
+#' 
+#' The current version is 6.14.0, implemented on March 31, 2026.
 #'
 #' @format ## `forecast_zones`
-#' An `sf` tibble data frame with 13 rows and 5 columns:
+#' An `sf` tibble data frame with 13 rows and 6 columns:
 #' \describe{
 #'   \item{prov_terr}{Abbreviation of province(s)/territory(ies) the zone covers, seperated by commas where more than 1. Character.}
 #'   \item{name_en}{English name of the zone. Factor.}
 #'   \item{name_fr}{French name of the zone. Factor.}
 #'   \item{perimeter}{Perimeter of the zone. Units: km.}
 #'   \item{area}{Area covered by the zone. Units: km^2.}
+#'   \item{version}{Version of the layer provided by data source. Factor.}
 #'   \item{geometry}{Forecast zone boundary polygons. `sf` sfc_GEOMETRY.}
 #'   ...
 #' }
