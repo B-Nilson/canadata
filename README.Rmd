@@ -45,33 +45,27 @@ The primary datasets made available are:
 ```{r datasets}
 library(canadata)
 
-provinces_and_territories |> print()
-forecast_zones |> print()
-indigenous_lands |> print()
-communities |> print()
-indigenous_communities |> print()
-gridded_2016_population |> print()
+provinces_and_territories |> sf::st_drop_geometry() |> head(13)
+forecast_zones |> sf::st_drop_geometry() |> head(10)
+indigenous_lands |> sf::st_drop_geometry() |> head(10)
+communities |> sf::st_drop_geometry() |> head(10)
+indigenous_communities |> sf::st_drop_geometry() |> head(10)
+gridded_2016_population |> sf::st_drop_geometry() |> head(10)
 ```
 
 ## Converting Point Layers
 
 All point layers have been saved as non-sf objects (lat/lng columns instead of a POINT geometry) with a CRS of `"WGS84"`, and require converting to sf before performing spatial operations:
 
-```{r convert_points}
+```{r convert_points, eval=FALSE}
 library(canadata)
 
-communities |> 
-  sf::st_as_sf(coords = c("lng", "lat"), crs = "WGS84") |>
-  print()
+communities |>
+  sf::st_as_sf(coords = c("lng", "lat"), crs = "WGS84")
 
-indigenous_communities |> 
-  sf::st_as_sf(coords = c("lng", "lat"), crs = "WGS84") |>
-  print()
+indigenous_communities |>
+  sf::st_as_sf(coords = c("lng", "lat"), crs = "WGS84")
 
-
-gridded_2016_population |> 
-  sf::st_as_sf(coords = c("lng", "lat"), crs = "WGS84") |>
-  print()
-
+gridded_2016_population |>
+  sf::st_as_sf(coords = c("lng", "lat"), crs = "WGS84")
 ```
-
